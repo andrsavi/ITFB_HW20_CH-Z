@@ -10,7 +10,7 @@
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group">
-        <intProp name="ThreadGroup.num_threads">10</intProp>
+        <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -20,7 +20,7 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="datetime">
+        <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="datetime" enabled="true">
           <stringProp name="scriptLanguage">groovy</stringProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="filename"></stringProp>
@@ -35,7 +35,7 @@ vars.put(&quot;datetime&quot;, isoDate)</stringProp>
           <stringProp name="TestPlan.comments">JSR223 PreProcessor</stringProp>
         </JSR223PreProcessor>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Login">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Login" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -93,7 +93,7 @@ vars.put(&quot;datetime&quot;, isoDate)</stringProp>
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Open appealls">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Open appealls" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -326,7 +326,7 @@ vars.put(&quot;appeallid&quot;, uuid)</stringProp>
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
             <collectionProp name="HeaderManager.headers">
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
@@ -375,7 +375,7 @@ vars.put(&quot;appeallid&quot;, uuid)</stringProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor">
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
             <stringProp name="JSONPostProcessor.referenceNames">appeallnumber</stringProp>
             <stringProp name="JSONPostProcessor.jsonPathExprs">$.value</stringProp>
             <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
@@ -383,7 +383,7 @@ vars.put(&quot;appeallid&quot;, uuid)</stringProp>
           </JSONPostProcessor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Search kontragent_btn_search" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Search kontragent_btn_search">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -517,12 +517,22 @@ vars.put(&quot;appeallid&quot;, uuid)</stringProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="false">
             <stringProp name="JSONPostProcessor.referenceNames">kontragentid</stringProp>
             <stringProp name="JSONPostProcessor.jsonPathExprs">$.__id</stringProp>
             <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
             <stringProp name="JSONPostProcessor.defaultValues">NOT_FOUND_KONTRAGENT_ID</stringProp>
           </JSONPostProcessor>
+          <hashTree/>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">def uuid = UUID.randomUUID().toString()
+vars.put(&quot;kontragentid&quot;, uuid)</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="TestPlan.comments">Генерация UUID и сохранение в переменную</stringProp>
+          </JSR223PreProcessor>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Kontragent create_btn_save" enabled="true">
@@ -538,7 +548,7 @@ vars.put(&quot;appeallid&quot;, uuid)</stringProp>
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&quot;payload&quot;:{&quot;__id&quot;:&quot;${kontragentid}&quot;,&quot;__createdBy&quot;:null,&quot;__createdAt&quot;:null,&quot;__updatedBy&quot;:null,&quot;__updatedAt&quot;:null,&quot;__deletedAt&quot;:null,&quot;__version&quot;:0,&quot;__directory&quot;:null,&quot;__currentUserPermissions&quot;:[&quot;read&quot;,&quot;create&quot;,&quot;update&quot;,&quot;delete&quot;,&quot;assign&quot;,&quot;bpmanage&quot;,&quot;export&quot;,&quot;import&quot;],&quot;__name&quot;:&quot;ASS_test_0${__threadNum}&quot;,&quot;_phone&quot;:null,&quot;_email&quot;:null,&quot;_website&quot;:null,&quot;_address&quot;:null,&quot;_inn&quot;:&quot;000000000000000&quot;,&quot;_kpp&quot;:null,&quot;_leads&quot;:null,&quot;_opportunities&quot;:null,&quot;_contacts&quot;:null,&quot;_legalName&quot;:null,&quot;_ogrn&quot;:null,&quot;_legalAddress&quot;:null,&quot;_correspondenceAddress&quot;:null,&quot;_bank&quot;:null,&quot;_bik&quot;:null,&quot;_operatingAccount&quot;:null,&quot;_correspondentAccount&quot;:null,&quot;_superiorName&quot;:null,&quot;_industries&quot;:null,&quot;_segment&quot;:null,&quot;_parentCompany&quot;:null,&quot;_childCompanies&quot;:null,&quot;__subscribers&quot;:null,&quot;__externalId&quot;:null,&quot;Type_turnover_participant&quot;:null,&quot;product_group&quot;:null,&quot;Main_contact&quot;:null,&quot;okpo&quot;:null,&quot;participantid_sysid&quot;:null,&quot;code&quot;:null,&quot;Responsible_employee&quot;:null,&quot;counterparty_contacts&quot;:null,&quot;type&quot;:null,&quot;phone_main&quot;:null,&quot;name_alternative&quot;:null,&quot;notes&quot;:null,&quot;file&quot;:null,&quot;itfb_respons_employee&quot;:null,&quot;itfb_industry&quot;:null,&quot;itfb_form_of_ownership&quot;:null,&quot;itfb_eaes&quot;:null,&quot;itfb_federal_district&quot;:null,&quot;itfb_subject_rf&quot;:null,&quot;itfb_top&quot;:null,&quot;itfb_tax_service_number&quot;:null,&quot;itfb_comment&quot;:null,&quot;itfb_company_size&quot;:null,&quot;itfb_ministry_agriculture&quot;:null,&quot;itfb_registration_gis_mt_system&quot;:&quot;2025-06-22T00:00:00.000Z&quot;,&quot;itfb_client_manager&quot;:null,&quot;itfb_role&quot;:null,&quot;itfb_gismt_exists&quot;:null,&quot;itfb_top_cat&quot;:null,&quot;itfb_union&quot;:null,&quot;itfb_loyalty_pcg&quot;:null,&quot;itfb_partner_type&quot;:null,&quot;itfb_email_list&quot;:null,&quot;itfb_phone_list&quot;:null,&quot;pcrm_back_system&quot;:null,&quot;resident&quot;:false,&quot;verified&quot;:false,&quot;allow_see_company_requests&quot;:false,&quot;group_responsible&quot;:null,&quot;gr_responsible&quot;:null,&quot;pcrm_back_system_lookup&quot;:null,&quot;__index&quot;:null,&quot;__tasks&quot;:null,&quot;__tasks_earliest_duedate&quot;:null,&quot;__tasks_performers&quot;:null,&quot;__debug&quot;:null,&quot;__externalProcessMeta&quot;:null,&quot;__isDuplicate&quot;:false},&quot;tempData&quot;:{&quot;withEventForceCreate&quot;:false,&quot;assignExistingIndex&quot;:false}}</stringProp>
+                <stringProp name="Argument.value">{&quot;payload&quot;:{&quot;__id&quot;:&quot;${kontragentid}&quot;,&quot;__createdBy&quot;:null,&quot;__createdAt&quot;:null,&quot;__updatedBy&quot;:null,&quot;__updatedAt&quot;:null,&quot;__deletedAt&quot;:null,&quot;__version&quot;:0,&quot;__directory&quot;:null,&quot;__currentUserPermissions&quot;:[&quot;read&quot;,&quot;create&quot;,&quot;update&quot;,&quot;delete&quot;,&quot;assign&quot;,&quot;bpmanage&quot;,&quot;export&quot;,&quot;import&quot;],&quot;__name&quot;:&quot;ASS_test_0${__threadNum}_${appeallnumber}&quot;,&quot;_phone&quot;:null,&quot;_email&quot;:null,&quot;_website&quot;:null,&quot;_address&quot;:null,&quot;_inn&quot;:&quot;${appeallnumber}${appeallnumber}${appeallnumber}&quot;,&quot;_kpp&quot;:null,&quot;_leads&quot;:null,&quot;_opportunities&quot;:null,&quot;_contacts&quot;:null,&quot;_legalName&quot;:null,&quot;_ogrn&quot;:null,&quot;_legalAddress&quot;:null,&quot;_correspondenceAddress&quot;:null,&quot;_bank&quot;:null,&quot;_bik&quot;:null,&quot;_operatingAccount&quot;:null,&quot;_correspondentAccount&quot;:null,&quot;_superiorName&quot;:null,&quot;_industries&quot;:null,&quot;_segment&quot;:null,&quot;_parentCompany&quot;:null,&quot;_childCompanies&quot;:null,&quot;__subscribers&quot;:null,&quot;__externalId&quot;:null,&quot;Type_turnover_participant&quot;:null,&quot;product_group&quot;:null,&quot;Main_contact&quot;:null,&quot;okpo&quot;:null,&quot;participantid_sysid&quot;:null,&quot;code&quot;:null,&quot;Responsible_employee&quot;:null,&quot;counterparty_contacts&quot;:null,&quot;type&quot;:null,&quot;phone_main&quot;:null,&quot;name_alternative&quot;:null,&quot;notes&quot;:null,&quot;file&quot;:null,&quot;itfb_respons_employee&quot;:null,&quot;itfb_industry&quot;:null,&quot;itfb_form_of_ownership&quot;:null,&quot;itfb_eaes&quot;:null,&quot;itfb_federal_district&quot;:null,&quot;itfb_subject_rf&quot;:null,&quot;itfb_top&quot;:null,&quot;itfb_tax_service_number&quot;:null,&quot;itfb_comment&quot;:null,&quot;itfb_company_size&quot;:null,&quot;itfb_ministry_agriculture&quot;:null,&quot;itfb_registration_gis_mt_system&quot;:&quot;${datetime}&quot;,&quot;itfb_client_manager&quot;:null,&quot;itfb_role&quot;:null,&quot;itfb_gismt_exists&quot;:null,&quot;itfb_top_cat&quot;:null,&quot;itfb_union&quot;:null,&quot;itfb_loyalty_pcg&quot;:null,&quot;itfb_partner_type&quot;:null,&quot;itfb_email_list&quot;:null,&quot;itfb_phone_list&quot;:null,&quot;pcrm_back_system&quot;:null,&quot;resident&quot;:false,&quot;verified&quot;:false,&quot;allow_see_company_requests&quot;:false,&quot;group_responsible&quot;:null,&quot;gr_responsible&quot;:null,&quot;pcrm_back_system_lookup&quot;:null,&quot;__index&quot;:null,&quot;__tasks&quot;:null,&quot;__tasks_earliest_duedate&quot;:null,&quot;__tasks_performers&quot;:null,&quot;__debug&quot;:null,&quot;__externalProcessMeta&quot;:null,&quot;__isDuplicate&quot;:false},&quot;tempData&quot;:{&quot;withEventForceCreate&quot;:false,&quot;assignExistingIndex&quot;:false}}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -677,7 +687,7 @@ vars.put(&quot;appeallid&quot;, uuid)</stringProp>
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Contact create_btn_get_id" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Contact create_btn_get_id">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -740,7 +750,7 @@ vars.put(&quot;appeallid&quot;, uuid)</stringProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor">
             <stringProp name="JSONPostProcessor.referenceNames">contactid</stringProp>
             <stringProp name="JSONPostProcessor.jsonPathExprs">$.__id</stringProp>
             <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
@@ -761,7 +771,7 @@ vars.put(&quot;appeallid&quot;, uuid)</stringProp>
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&quot;payload&quot;:{&quot;__id&quot;:&quot;${contactid}&quot;,&quot;__createdBy&quot;:null,&quot;__createdAt&quot;:null,&quot;__updatedBy&quot;:null,&quot;__updatedAt&quot;:null,&quot;__deletedAt&quot;:null,&quot;__version&quot;:0,&quot;__directory&quot;:null,&quot;__currentUserPermissions&quot;:[&quot;read&quot;,&quot;create&quot;,&quot;update&quot;,&quot;delete&quot;,&quot;assign&quot;,&quot;bpmanage&quot;,&quot;export&quot;,&quot;import&quot;],&quot;_fullname&quot;:{&quot;lastname&quot;:&quot;&quot;,&quot;middlename&quot;:&quot;&quot;,&quot;firstname&quot;:&quot;ASS_test_0${__threadNum}&quot;},&quot;_position&quot;:null,&quot;_phone&quot;:null,&quot;_email&quot;:null,&quot;_skype&quot;:null,&quot;_companies&quot;:null,&quot;_leads&quot;:null,&quot;_opportunities&quot;:null,&quot;_account&quot;:null,&quot;_preferences&quot;:null,&quot;__subscribers&quot;:null,&quot;__externalId&quot;:null,&quot;responsible_employee&quot;:null,&quot;supervisor&quot;:null,&quot;userid&quot;:null,&quot;job_title&quot;:null,&quot;related_counterparty&quot;:null,&quot;file&quot;:null,&quot;notes&quot;:null,&quot;departament&quot;:null,&quot;itfb_respons_employee&quot;:null,&quot;itfb_regaddress&quot;:null,&quot;itfb_livaddress&quot;:null,&quot;itfb_mailaddress&quot;:null,&quot;itfb_email_list&quot;:null,&quot;group_responsible&quot;:null,&quot;gr_responsible&quot;:null,&quot;__name&quot;:null,&quot;__index&quot;:null,&quot;__tasks&quot;:null,&quot;__tasks_earliest_duedate&quot;:null,&quot;__tasks_performers&quot;:null,&quot;__debug&quot;:null,&quot;_warm_up_stage&quot;:null,&quot;__externalProcessMeta&quot;:null,&quot;__isDuplicate&quot;:false},&quot;tempData&quot;:{&quot;withEventForceCreate&quot;:false,&quot;assignExistingIndex&quot;:false}}</stringProp>
+                <stringProp name="Argument.value">{&quot;payload&quot;:{&quot;__id&quot;:&quot;${contactid}&quot;,&quot;__createdBy&quot;:null,&quot;__createdAt&quot;:null,&quot;__updatedBy&quot;:null,&quot;__updatedAt&quot;:null,&quot;__deletedAt&quot;:null,&quot;__version&quot;:0,&quot;__directory&quot;:null,&quot;__currentUserPermissions&quot;:[&quot;read&quot;,&quot;create&quot;,&quot;update&quot;,&quot;delete&quot;,&quot;assign&quot;,&quot;bpmanage&quot;,&quot;export&quot;,&quot;import&quot;],&quot;_fullname&quot;:{&quot;lastname&quot;:&quot;&quot;,&quot;middlename&quot;:&quot;&quot;,&quot;firstname&quot;:&quot;ASS_test_0${__threadNum}_${appeallnumber}&quot;},&quot;_position&quot;:null,&quot;_phone&quot;:null,&quot;_email&quot;:null,&quot;_skype&quot;:null,&quot;_companies&quot;:null,&quot;_leads&quot;:null,&quot;_opportunities&quot;:null,&quot;_account&quot;:null,&quot;_preferences&quot;:null,&quot;__subscribers&quot;:null,&quot;__externalId&quot;:null,&quot;responsible_employee&quot;:null,&quot;supervisor&quot;:null,&quot;userid&quot;:null,&quot;job_title&quot;:null,&quot;related_counterparty&quot;:null,&quot;file&quot;:null,&quot;notes&quot;:null,&quot;departament&quot;:null,&quot;itfb_respons_employee&quot;:null,&quot;itfb_regaddress&quot;:null,&quot;itfb_livaddress&quot;:null,&quot;itfb_mailaddress&quot;:null,&quot;itfb_email_list&quot;:null,&quot;group_responsible&quot;:null,&quot;gr_responsible&quot;:null,&quot;__name&quot;:null,&quot;__index&quot;:null,&quot;__tasks&quot;:null,&quot;__tasks_earliest_duedate&quot;:null,&quot;__tasks_performers&quot;:null,&quot;__debug&quot;:null,&quot;_warm_up_stage&quot;:null,&quot;__externalProcessMeta&quot;:null,&quot;__isDuplicate&quot;:false},&quot;tempData&quot;:{&quot;withEventForceCreate&quot;:false,&quot;assignExistingIndex&quot;:false}}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -846,7 +856,7 @@ vars.put(&quot;appeallid&quot;, uuid)</stringProp>
               <collectionProp name="Arguments.arguments">
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&quot;payload&quot;:{&quot;__id&quot;:&quot;${appeallid}&quot;,&quot;__createdBy&quot;:null,&quot;__createdAt&quot;:null,&quot;__updatedBy&quot;:null,&quot;__updatedAt&quot;:null,&quot;__deletedAt&quot;:null,&quot;__version&quot;:0,&quot;__directory&quot;:null,&quot;__currentUserPermissions&quot;:[&quot;read&quot;,&quot;create&quot;,&quot;update&quot;,&quot;delete&quot;,&quot;assign&quot;,&quot;bpmanage&quot;,&quot;export&quot;,&quot;import&quot;],&quot;__externalId&quot;:null,&quot;application_type&quot;:[{&quot;code&quot;:&quot;consultation&quot;,&quot;name&quot;:&quot;Консультация&quot;}],&quot;priority&quot;:[{&quot;code&quot;:&quot;low&quot;,&quot;name&quot;:&quot;4. Стандартный &quot;}],&quot;criticality&quot;:[{&quot;code&quot;:&quot;middle&quot;,&quot;name&quot;:&quot;Средняя&quot;}],&quot;impact&quot;:[&quot;018f0b71-1ef0-78af-bcc5-740e89398bed&quot;],&quot;urgency&quot;:[{&quot;code&quot;:&quot;low&quot;,&quot;name&quot;:&quot;4 - Низкая&quot;}],&quot;topic&quot;:&quot;ASS_test_0${__threadNum}_${appeallnumber}&quot;,&quot;application_text&quot;:&quot;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&quot;,&quot;attachments&quot;:null,&quot;external_applicant&quot;:null,&quot;contact_information&quot;:[{&quot;type&quot;:&quot;telegram&quot;,&quot;login&quot;:&quot;&quot;}],&quot;company&quot;:[&quot;019796ea-2895-7770-8159-987fa7f7da1b&quot;],&quot;responsible&quot;:null,&quot;service&quot;:[&quot;01951800-a778-7cc8-b932-3afa87526aed&quot;],&quot;client_type&quot;:false,&quot;working_mail&quot;:null,&quot;table_of_sla_indicators&quot;:null,&quot;sla_level&quot;:null,&quot;done_on_time&quot;:null,&quot;reason_for_pending&quot;:null,&quot;remaining_time&quot;:null,&quot;time_left&quot;:0,&quot;change_status_date&quot;:null,&quot;is_update&quot;:false,&quot;transition_time_to_status_in_work&quot;:null,&quot;link_to_application&quot;:null,&quot;solution_time_timer&quot;:null,&quot;reaction_time_timer&quot;:null,&quot;square_address&quot;:&quot;elma365ent.itfbgroup.ru&quot;,&quot;regulation_time&quot;:null,&quot;reaction_time&quot;:0,&quot;solution_description&quot;:null,&quot;id&quot;:null,&quot;session_id&quot;:null,&quot;operators&quot;:null,&quot;observers&quot;:null,&quot;aplicant&quot;:null,&quot;priority_color&quot;:&quot;![p0_green.png](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAWCAYAAABUpxX0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEySURBVHgB7Ze/SsNQFMa/E6UVpRos4u4/cNMXkAg6RdcSXBqC75HmDXyCmC4q7SSSSYfiC9hBESyKkygqNAShFe0xB1LwCcIN5Lede5cfl+/C+Qgp1sWhwfTrMrCRjDoUgoDOiKjZNv0gnYFa6LhzpUrDXNvF4swCypNlqETv8xFXT9eIvuNGy/Q9skLHrpQqx87mgXKy/xn+DOHfnCAeRNsaM9d3lraUFhbET5LARK6WZNhYrS4jD0h05c9pyBFpGvRcSY8ppLOikM6KQjorCumsKKSzQqT7svblCS1pAd23r3fkASkD0mI0YvbCh0uo/triJ+1lRNycuD3tPq/U1un+o2foU7OoTs9DJUT2JX5F6+4c0SDy2nvBEY0vrdC2makupQBq0ZcISyLO9oOOHPwBQYRoM7aWKJsAAAAASUVORK5CYII=)&quot;,&quot;reaction_time_exceeded&quot;:false,&quot;tags&quot;:null,&quot;type_responsible_person_selection&quot;:[{&quot;code&quot;:&quot;manually&quot;,&quot;name&quot;:&quot;Вручную&quot;}],&quot;check_done_on_time_process_id&quot;:null,&quot;our_company&quot;:null,&quot;requalified&quot;:false,&quot;evaluation&quot;:null,&quot;comment_from_the_applicant&quot;:null,&quot;application_completed&quot;:false,&quot;getting_response&quot;:false,&quot;external_applicant_response&quot;:null,&quot;execution_application_accepted&quot;:null,&quot;application_completed_id_process&quot;:null,&quot;pattern&quot;:null,&quot;has_duplicates&quot;:false,&quot;is_parent&quot;:null,&quot;is_child&quot;:null,&quot;child_applications&quot;:null,&quot;current_support_level&quot;:null,&quot;SDApplicationHistory&quot;:null,&quot;contract&quot;:[&quot;01955701-4ddd-7337-a96a-9167e8f13baa&quot;],&quot;cmdb&quot;:null,&quot;the_application_was_returned&quot;:false,&quot;__subscribers&quot;:null,&quot;service_catalog&quot;:[&quot;018f16c4-a050-7d4e-8bc8-edd53f583b82&quot;],&quot;initial_communication_channel&quot;:null,&quot;channel&quot;:null,&quot;changing_statuses&quot;:null,&quot;observers_role&quot;:null,&quot;responsible_for_the_service&quot;:null,&quot;sla_standard&quot;:null,&quot;fill_in_decision_manually&quot;:true,&quot;ola_solution_time_timer&quot;:null,&quot;ola_reaction_time_timer&quot;:null,&quot;moved_from_support_level_application&quot;:null,&quot;time_to_collect_information_timer&quot;:null,&quot;time_to_confirm_the_decision_timer&quot;:null,&quot;ola_scorecard&quot;:null,&quot;waiting_time_working&quot;:null,&quot;date_of_application_formation&quot;:null,&quot;ola_level&quot;:null,&quot;id_ola_regulatory_review_process&quot;:null,&quot;information_is_collected&quot;:false,&quot;remaining_time_ola&quot;:null,&quot;date_level_change&quot;:null,&quot;time_left_ola&quot;:null,&quot;ola_route&quot;:null,&quot;case_origin&quot;:[&quot;5e5e202a-f46b-1410-3692-0050ba5d6c38&quot;],&quot;could_solved_prior_line&quot;:null,&quot;incorrectly_classified&quot;:null,&quot;not_enough_information&quot;:null,&quot;checkbox_comment&quot;:null,&quot;stop_production&quot;:false,&quot;data_change_2LP&quot;:null,&quot;question_transferred_TG&quot;:null,&quot;question_Transferred_UD&quot;:null,&quot;stops_sipment&quot;:false,&quot;priority_change_reason&quot;:null,&quot;escalation_reason&quot;:null,&quot;inn_contractor&quot;:null,&quot;name_contact&quot;:[&quot;0197970b-9399-7770-815a-4c2c90390b8f&quot;],&quot;category_service&quot;:null,&quot;request_subcategory&quot;:null,&quot;closure_code&quot;:null,&quot;actual_elapsed_time&quot;:null,&quot;level_of_difficulty&quot;:null,&quot;error_date&quot;:null,&quot;component&quot;:null,&quot;description&quot;:null,&quot;analysis&quot;:null,&quot;topic_analysis&quot;:null,&quot;indication&quot;:null,&quot;root_cause&quot;:null,&quot;description_errors&quot;:null,&quot;error&quot;:null,&quot;file_analysis&quot;:null,&quot;file_comment&quot;:null,&quot;note&quot;:null,&quot;support_level&quot;:[{&quot;code&quot;:&quot;1_line&quot;,&quot;name&quot;:&quot;1 линия поддержки&quot;}],&quot;problems&quot;:null,&quot;group_responsible&quot;:[{&quot;code&quot;:&quot;Диспетчеры&quot;,&quot;name&quot;:&quot;Диспетчеры&quot;}],&quot;work_phone&quot;:null,&quot;mobile_phone&quot;:null,&quot;itfb_reason_for_delay&quot;:null,&quot;itfb_detailed_reason&quot;:null,&quot;itfb_timer_end_time&quot;:null,&quot;hide_editbtn&quot;:false,&quot;change_status&quot;:false,&quot;changeGroupToLetter&quot;:false,&quot;itfb_registered_on&quot;:&quot;${datetime}&quot;,&quot;parent_case&quot;:null,&quot;itfb_reason_reopen&quot;:null,&quot;itfb_closure_date&quot;:null,&quot;id_massincident&quot;:null,&quot;processing&quot;:false,&quot;itfb_solved_on_support_level&quot;:null,&quot;subcategory&quot;:[&quot;019517fe-c6c8-7cc8-b932-2eb5edd1d74c&quot;],&quot;mi_name&quot;:null,&quot;lvl_of_difficulty&quot;:null,&quot;new_message_flag&quot;:null,&quot;header_message&quot;:null,&quot;average_solution_time&quot;:null,&quot;jira_id&quot;:null,&quot;stop_listener&quot;:false,&quot;itfb_tags_applications&quot;:null,&quot;itfb_no_data&quot;:null,&quot;case_origin_email&quot;:null,&quot;answers_autofaq&quot;:null,&quot;autofaq&quot;:false,&quot;autofaq_processing&quot;:false,&quot;autofaq_closed&quot;:false,&quot;solution_provided_on&quot;:null,&quot;responded_on&quot;:null,&quot;itfb_expired_by_permission&quot;:null,&quot;itfb_overdue_1_escalation&quot;:null,&quot;itfb_escalation_line_date&quot;:null,&quot;itfb_overdue_2_escalation&quot;:null,&quot;itfb_first_line_overdue&quot;:null,&quot;itfb_overdue_1&quot;:null,&quot;itfb_overdue_2&quot;:null,&quot;itfb_overdue_3&quot;:null,&quot;itfb_second_line_overdue&quot;:null,&quot;itfb_suppor_level_modified_on&quot;:null,&quot;itfb_third_line_overdue&quot;:null,&quot;jira_key&quot;:null,&quot;number_adjacent_is&quot;:null,&quot;phone_speech&quot;:null,&quot;itfb_sla_ola_violation_flag&quot;:&quot;SLA:OK,OLA_LINE_1:OK,OLA_LINE_2:OK,OLA_LINE_3:OK&quot;,&quot;itfb_overdue_confirmation_time_2&quot;:null,&quot;ola_solution_scheduled_dates_l3&quot;:null,&quot;application_text_string&quot;:null,&quot;solution_description_string&quot;:null,&quot;__name&quot;:&quot;SR${appeallnumber}&quot;,&quot;__externalProcessMeta&quot;:null,&quot;__index&quot;:${appeallnumber},&quot;__tasks&quot;:null,&quot;__tasks_earliest_duedate&quot;:null,&quot;__tasks_performers&quot;:null,&quot;__debug&quot;:null,&quot;__status&quot;:null,&quot;__statusChangedAt&quot;:null,&quot;__isDuplicate&quot;:false},&quot;tempData&quot;:{&quot;withEventForceCreate&quot;:false,&quot;assignExistingIndex&quot;:true,&quot;registeredIndex&quot;:${appeallnumber}}}</stringProp>
+                  <stringProp name="Argument.value">{&quot;payload&quot;:{&quot;__id&quot;:&quot;${appeallid}&quot;,&quot;__createdBy&quot;:null,&quot;__createdAt&quot;:null,&quot;__updatedBy&quot;:null,&quot;__updatedAt&quot;:null,&quot;__deletedAt&quot;:null,&quot;__version&quot;:0,&quot;__directory&quot;:null,&quot;__currentUserPermissions&quot;:[&quot;read&quot;,&quot;create&quot;,&quot;update&quot;,&quot;delete&quot;,&quot;assign&quot;,&quot;bpmanage&quot;,&quot;export&quot;,&quot;import&quot;],&quot;__externalId&quot;:null,&quot;application_type&quot;:[{&quot;code&quot;:&quot;consultation&quot;,&quot;name&quot;:&quot;Консультация&quot;}],&quot;priority&quot;:[{&quot;code&quot;:&quot;low&quot;,&quot;name&quot;:&quot;4. Стандартный &quot;}],&quot;criticality&quot;:[{&quot;code&quot;:&quot;middle&quot;,&quot;name&quot;:&quot;Средняя&quot;}],&quot;impact&quot;:[&quot;018f0b71-1ef0-78af-bcc5-740e89398bed&quot;],&quot;urgency&quot;:[{&quot;code&quot;:&quot;low&quot;,&quot;name&quot;:&quot;4 - Низкая&quot;}],&quot;topic&quot;:&quot;ASS_test_0${__threadNum}_${appeallnumber}&quot;,&quot;application_text&quot;:&quot;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&quot;,&quot;attachments&quot;:null,&quot;external_applicant&quot;:null,&quot;contact_information&quot;:[{&quot;type&quot;:&quot;telegram&quot;,&quot;login&quot;:&quot;&quot;}],&quot;company&quot;:[&quot;019796ea-2895-7770-8159-987fa7f7da1b&quot;],&quot;responsible&quot;:null,&quot;service&quot;:[&quot;01951800-a778-7cc8-b932-3afa87526aed&quot;],&quot;client_type&quot;:false,&quot;working_mail&quot;:null,&quot;table_of_sla_indicators&quot;:null,&quot;sla_level&quot;:null,&quot;done_on_time&quot;:null,&quot;reason_for_pending&quot;:null,&quot;remaining_time&quot;:null,&quot;time_left&quot;:0,&quot;change_status_date&quot;:null,&quot;is_update&quot;:false,&quot;transition_time_to_status_in_work&quot;:null,&quot;link_to_application&quot;:null,&quot;solution_time_timer&quot;:null,&quot;reaction_time_timer&quot;:null,&quot;square_address&quot;:&quot;elma365ent.itfbgroup.ru&quot;,&quot;regulation_time&quot;:null,&quot;reaction_time&quot;:0,&quot;solution_description&quot;:null,&quot;id&quot;:null,&quot;session_id&quot;:null,&quot;operators&quot;:null,&quot;observers&quot;:null,&quot;aplicant&quot;:null,&quot;priority_color&quot;:&quot;![p0_green.png](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAWCAYAAABUpxX0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEySURBVHgB7Ze/SsNQFMa/E6UVpRos4u4/cNMXkAg6RdcSXBqC75HmDXyCmC4q7SSSSYfiC9hBESyKkygqNAShFe0xB1LwCcIN5Lede5cfl+/C+Qgp1sWhwfTrMrCRjDoUgoDOiKjZNv0gnYFa6LhzpUrDXNvF4swCypNlqETv8xFXT9eIvuNGy/Q9skLHrpQqx87mgXKy/xn+DOHfnCAeRNsaM9d3lraUFhbET5LARK6WZNhYrS4jD0h05c9pyBFpGvRcSY8ppLOikM6KQjorCumsKKSzQqT7svblCS1pAd23r3fkASkD0mI0YvbCh0uo/triJ+1lRNycuD3tPq/U1un+o2foU7OoTs9DJUT2JX5F6+4c0SDy2nvBEY0vrdC2makupQBq0ZcISyLO9oOOHPwBQYRoM7aWKJsAAAAASUVORK5CYII=)&quot;,&quot;reaction_time_exceeded&quot;:false,&quot;tags&quot;:null,&quot;type_responsible_person_selection&quot;:[{&quot;code&quot;:&quot;manually&quot;,&quot;name&quot;:&quot;Вручную&quot;}],&quot;check_done_on_time_process_id&quot;:null,&quot;our_company&quot;:null,&quot;requalified&quot;:false,&quot;evaluation&quot;:null,&quot;comment_from_the_applicant&quot;:null,&quot;application_completed&quot;:false,&quot;getting_response&quot;:false,&quot;external_applicant_response&quot;:null,&quot;execution_application_accepted&quot;:null,&quot;application_completed_id_process&quot;:null,&quot;pattern&quot;:null,&quot;has_duplicates&quot;:false,&quot;is_parent&quot;:null,&quot;is_child&quot;:null,&quot;child_applications&quot;:null,&quot;current_support_level&quot;:null,&quot;SDApplicationHistory&quot;:null,&quot;contract&quot;:[&quot;${kontragentid}&quot;],&quot;cmdb&quot;:null,&quot;the_application_was_returned&quot;:false,&quot;__subscribers&quot;:null,&quot;service_catalog&quot;:[&quot;018f16c4-a050-7d4e-8bc8-edd53f583b82&quot;],&quot;initial_communication_channel&quot;:null,&quot;channel&quot;:null,&quot;changing_statuses&quot;:null,&quot;observers_role&quot;:null,&quot;responsible_for_the_service&quot;:null,&quot;sla_standard&quot;:null,&quot;fill_in_decision_manually&quot;:true,&quot;ola_solution_time_timer&quot;:null,&quot;ola_reaction_time_timer&quot;:null,&quot;moved_from_support_level_application&quot;:null,&quot;time_to_collect_information_timer&quot;:null,&quot;time_to_confirm_the_decision_timer&quot;:null,&quot;ola_scorecard&quot;:null,&quot;waiting_time_working&quot;:null,&quot;date_of_application_formation&quot;:null,&quot;ola_level&quot;:null,&quot;id_ola_regulatory_review_process&quot;:null,&quot;information_is_collected&quot;:false,&quot;remaining_time_ola&quot;:null,&quot;date_level_change&quot;:null,&quot;time_left_ola&quot;:null,&quot;ola_route&quot;:null,&quot;case_origin&quot;:[&quot;5e5e202a-f46b-1410-3692-0050ba5d6c38&quot;],&quot;could_solved_prior_line&quot;:null,&quot;incorrectly_classified&quot;:null,&quot;not_enough_information&quot;:null,&quot;checkbox_comment&quot;:null,&quot;stop_production&quot;:false,&quot;data_change_2LP&quot;:null,&quot;question_transferred_TG&quot;:null,&quot;question_Transferred_UD&quot;:null,&quot;stops_sipment&quot;:false,&quot;priority_change_reason&quot;:null,&quot;escalation_reason&quot;:null,&quot;inn_contractor&quot;:null,&quot;name_contact&quot;:[&quot;${contactid}&quot;],&quot;category_service&quot;:null,&quot;request_subcategory&quot;:null,&quot;closure_code&quot;:null,&quot;actual_elapsed_time&quot;:null,&quot;level_of_difficulty&quot;:null,&quot;error_date&quot;:null,&quot;component&quot;:null,&quot;description&quot;:null,&quot;analysis&quot;:null,&quot;topic_analysis&quot;:null,&quot;indication&quot;:null,&quot;root_cause&quot;:null,&quot;description_errors&quot;:null,&quot;error&quot;:null,&quot;file_analysis&quot;:null,&quot;file_comment&quot;:null,&quot;note&quot;:null,&quot;support_level&quot;:[{&quot;code&quot;:&quot;1_line&quot;,&quot;name&quot;:&quot;1 линия поддержки&quot;}],&quot;problems&quot;:null,&quot;group_responsible&quot;:[{&quot;code&quot;:&quot;Диспетчеры&quot;,&quot;name&quot;:&quot;Диспетчеры&quot;}],&quot;work_phone&quot;:null,&quot;mobile_phone&quot;:null,&quot;itfb_reason_for_delay&quot;:null,&quot;itfb_detailed_reason&quot;:null,&quot;itfb_timer_end_time&quot;:null,&quot;hide_editbtn&quot;:false,&quot;change_status&quot;:false,&quot;changeGroupToLetter&quot;:false,&quot;itfb_registered_on&quot;:&quot;${datetime}&quot;,&quot;parent_case&quot;:null,&quot;itfb_reason_reopen&quot;:null,&quot;itfb_closure_date&quot;:null,&quot;id_massincident&quot;:null,&quot;processing&quot;:false,&quot;itfb_solved_on_support_level&quot;:null,&quot;subcategory&quot;:[&quot;019517fe-c6c8-7cc8-b932-2eb5edd1d74c&quot;],&quot;mi_name&quot;:null,&quot;lvl_of_difficulty&quot;:null,&quot;new_message_flag&quot;:null,&quot;header_message&quot;:null,&quot;average_solution_time&quot;:null,&quot;jira_id&quot;:null,&quot;stop_listener&quot;:false,&quot;itfb_tags_applications&quot;:null,&quot;itfb_no_data&quot;:null,&quot;case_origin_email&quot;:null,&quot;answers_autofaq&quot;:null,&quot;autofaq&quot;:false,&quot;autofaq_processing&quot;:false,&quot;autofaq_closed&quot;:false,&quot;solution_provided_on&quot;:null,&quot;responded_on&quot;:null,&quot;itfb_expired_by_permission&quot;:null,&quot;itfb_overdue_1_escalation&quot;:null,&quot;itfb_escalation_line_date&quot;:null,&quot;itfb_overdue_2_escalation&quot;:null,&quot;itfb_first_line_overdue&quot;:null,&quot;itfb_overdue_1&quot;:null,&quot;itfb_overdue_2&quot;:null,&quot;itfb_overdue_3&quot;:null,&quot;itfb_second_line_overdue&quot;:null,&quot;itfb_suppor_level_modified_on&quot;:null,&quot;itfb_third_line_overdue&quot;:null,&quot;jira_key&quot;:null,&quot;number_adjacent_is&quot;:null,&quot;phone_speech&quot;:null,&quot;itfb_sla_ola_violation_flag&quot;:&quot;SLA:OK,OLA_LINE_1:OK,OLA_LINE_2:OK,OLA_LINE_3:OK&quot;,&quot;itfb_overdue_confirmation_time_2&quot;:null,&quot;ola_solution_scheduled_dates_l3&quot;:null,&quot;application_text_string&quot;:null,&quot;solution_description_string&quot;:null,&quot;__name&quot;:&quot;SR${appeallnumber}&quot;,&quot;__externalProcessMeta&quot;:null,&quot;__index&quot;:${appeallnumber},&quot;__tasks&quot;:null,&quot;__tasks_earliest_duedate&quot;:null,&quot;__tasks_performers&quot;:null,&quot;__debug&quot;:null,&quot;__status&quot;:null,&quot;__statusChangedAt&quot;:null,&quot;__isDuplicate&quot;:false},&quot;tempData&quot;:{&quot;withEventForceCreate&quot;:false,&quot;assignExistingIndex&quot;:true,&quot;registeredIndex&quot;:${appeallnumber}}}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
@@ -919,7 +929,7 @@ vars.put(&quot;appeallid&quot;, uuid)</stringProp>
           </FloatProperty>
         </ThroughputController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Create appeall with file ../fileformatcheck">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Create appeall with file ../fileformatcheck" enabled="true">
             <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
             <stringProp name="HTTPSampler.port">0</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -1002,7 +1012,7 @@ vars.put(&quot;appeallid&quot;, uuid)</stringProp>
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Create appeall with file ../putlink">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Create appeall with file ../putlink" enabled="true">
             <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
             <stringProp name="HTTPSampler.port">0</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -1095,7 +1105,7 @@ vars.put(&quot;appeallid&quot;, uuid)</stringProp>
             </JSONPostProcessor>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Load file">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Load file" enabled="true">
             <stringProp name="HTTPSampler.protocol">http</stringProp>
             <stringProp name="HTTPSampler.path">${filelink}</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1330,7 +1340,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Create appeall with file">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Create appeall with file" enabled="true">
             <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
             <stringProp name="HTTPSampler.port">0</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -1352,7 +1362,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
               <collectionProp name="Arguments.arguments">
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&quot;payload&quot;:{&quot;__id&quot;:&quot;${appeallid}&quot;,&quot;__createdBy&quot;:null,&quot;__createdAt&quot;:null,&quot;__updatedBy&quot;:null,&quot;__updatedAt&quot;:null,&quot;__deletedAt&quot;:null,&quot;__version&quot;:0,&quot;__directory&quot;:null,&quot;__currentUserPermissions&quot;:[&quot;read&quot;,&quot;create&quot;,&quot;update&quot;,&quot;delete&quot;,&quot;assign&quot;,&quot;bpmanage&quot;,&quot;export&quot;,&quot;import&quot;],&quot;__externalId&quot;:null,&quot;application_type&quot;:[{&quot;code&quot;:&quot;consultation&quot;,&quot;name&quot;:&quot;Консультация&quot;}],&quot;priority&quot;:[{&quot;code&quot;:&quot;low&quot;,&quot;name&quot;:&quot;4. Стандартный&quot;}],&quot;criticality&quot;:[{&quot;code&quot;:&quot;middle&quot;,&quot;name&quot;:&quot;Средняя&quot;}],&quot;impact&quot;:[&quot;018f0b71-1ef0-78af-bcc5-740e89398bed&quot;],&quot;urgency&quot;:[{&quot;code&quot;:&quot;low&quot;,&quot;name&quot;:&quot;4 - Низкая&quot;}],&quot;topic&quot;:&quot;ASS_test_0${__threadNum}_${appeallnumber}&quot;,&quot;application_text&quot;:&quot;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&quot;,&quot;attachments&quot;:null,&quot;external_applicant&quot;:null,&quot;contact_information&quot;:[{&quot;type&quot;:&quot;telegram&quot;,&quot;login&quot;:&quot;&quot;}],&quot;company&quot;:[&quot;019796ea-2895-7770-8159-987fa7f7da1b&quot;],&quot;responsible&quot;:null,&quot;service&quot;:[&quot;01951800-a778-7cc8-b932-3afa87526aed&quot;],&quot;client_type&quot;:false,&quot;working_mail&quot;:null,&quot;table_of_sla_indicators&quot;:null,&quot;sla_level&quot;:null,&quot;done_on_time&quot;:null,&quot;reason_for_pending&quot;:null,&quot;remaining_time&quot;:null,&quot;time_left&quot;:0,&quot;change_status_date&quot;:null,&quot;is_update&quot;:false,&quot;transition_time_to_status_in_work&quot;:null,&quot;link_to_application&quot;:null,&quot;solution_time_timer&quot;:null,&quot;reaction_time_timer&quot;:null,&quot;square_address&quot;:&quot;elma365ent.itfbgroup.ru&quot;,&quot;regulation_time&quot;:null,&quot;reaction_time&quot;:0,&quot;solution_description&quot;:null,&quot;id&quot;:null,&quot;session_id&quot;:null,&quot;operators&quot;:null,&quot;observers&quot;:null,&quot;aplicant&quot;:null,&quot;priority_color&quot;:&quot;![p0_green.png](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAWCAYAAABUpxX0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEySURBVHgB7Ze/SsNQFMa/E6UVpRos4u4/cNMXkAg6RdcSXBqC75HmDXyCmC4q7SSSSYfiC9hBESyKkygqNAShFe0xB1LwCcIN5Lede5cfl+/C+Qgp1sWhwfTrMrCRjDoUgoDOiKjZNv0gnYFa6LhzpUrDXNvF4swCypNlqETv8xFXT9eIvuNGy/Q9skLHrpQqx87mgXKy/xn+DOHfnCAeRNsaM9d3lraUFhbET5LARK6WZNhYrS4jD0h05c9pyBFpGvRcSY8ppLOikM6KQjorCumsKKSzQqT7svblCS1pAd23r3fkASkD0mI0YvbCh0uo/triJ+1lRNycuD3tPq/U1un+o2foU7OoTs9DJUT2JX5F6+4c0SDy2nvBEY0vrdC2makupQBq0ZcISyLO9oOOHPwBQYRoM7aWKJsAAAAASUVORK5CYII=)&quot;,&quot;reaction_time_exceeded&quot;:false,&quot;tags&quot;:null,&quot;type_responsible_person_selection&quot;:[{&quot;code&quot;:&quot;manually&quot;,&quot;name&quot;:&quot;Вручную&quot;}],&quot;check_done_on_time_process_id&quot;:null,&quot;our_company&quot;:null,&quot;requalified&quot;:false,&quot;evaluation&quot;:null,&quot;comment_from_the_applicant&quot;:null,&quot;application_completed&quot;:false,&quot;getting_response&quot;:false,&quot;external_applicant_response&quot;:null,&quot;execution_application_accepted&quot;:null,&quot;application_completed_id_process&quot;:null,&quot;pattern&quot;:null,&quot;has_duplicates&quot;:false,&quot;is_parent&quot;:null,&quot;is_child&quot;:null,&quot;child_applications&quot;:null,&quot;current_support_level&quot;:null,&quot;SDApplicationHistory&quot;:null,&quot;contract&quot;:[&quot;01955701-4ddd-7337-a96a-9167e8f13baa&quot;],&quot;cmdb&quot;:null,&quot;the_application_was_returned&quot;:false,&quot;__subscribers&quot;:null,&quot;service_catalog&quot;:[&quot;018f16c4-a050-7d4e-8bc8-edd53f583b82&quot;],&quot;initial_communication_channel&quot;:null,&quot;channel&quot;:null,&quot;changing_statuses&quot;:null,&quot;observers_role&quot;:null,&quot;responsible_for_the_service&quot;:null,&quot;sla_standard&quot;:null,&quot;fill_in_decision_manually&quot;:true,&quot;ola_solution_time_timer&quot;:null,&quot;ola_reaction_time_timer&quot;:null,&quot;moved_from_support_level_application&quot;:null,&quot;time_to_collect_information_timer&quot;:null,&quot;time_to_confirm_the_decision_timer&quot;:null,&quot;ola_scorecard&quot;:null,&quot;waiting_time_working&quot;:null,&quot;date_of_application_formation&quot;:null,&quot;ola_level&quot;:null,&quot;id_ola_regulatory_review_process&quot;:null,&quot;information_is_collected&quot;:false,&quot;remaining_time_ola&quot;:null,&quot;date_level_change&quot;:null,&quot;time_left_ola&quot;:null,&quot;ola_route&quot;:null,&quot;case_origin&quot;:[&quot;5e5e202a-f46b-1410-3692-0050ba5d6c38&quot;],&quot;could_solved_prior_line&quot;:null,&quot;incorrectly_classified&quot;:null,&quot;not_enough_information&quot;:null,&quot;checkbox_comment&quot;:null,&quot;stop_production&quot;:false,&quot;data_change_2LP&quot;:null,&quot;question_transferred_TG&quot;:null,&quot;question_Transferred_UD&quot;:null,&quot;stops_sipment&quot;:false,&quot;priority_change_reason&quot;:null,&quot;escalation_reason&quot;:null,&quot;inn_contractor&quot;:null,&quot;name_contact&quot;:[&quot;0197970b-9399-7770-815a-4c2c90390b8f&quot;],&quot;category_service&quot;:null,&quot;request_subcategory&quot;:null,&quot;closure_code&quot;:null,&quot;actual_elapsed_time&quot;:null,&quot;level_of_difficulty&quot;:null,&quot;error_date&quot;:null,&quot;component&quot;:null,&quot;description&quot;:null,&quot;analysis&quot;:null,&quot;topic_analysis&quot;:null,&quot;indication&quot;:null,&quot;root_cause&quot;:null,&quot;description_errors&quot;:null,&quot;error&quot;:null,&quot;file_analysis&quot;:null,&quot;file_comment&quot;:[{&quot;id&quot;:&quot;${fileid}&quot;,&quot;name&quot;:&quot;TESTDOC.docx&quot;,&quot;hash&quot;:&quot;${fileid}&quot;,&quot;size&quot;:13467,&quot;file&quot;:{&quot;__id&quot;:&quot;${fileid}&quot;,&quot;__createdAt&quot;:&quot;2025-06-22T13:02:39Z&quot;,&quot;__updatedAt&quot;:&quot;2025-06-22T13:02:39Z&quot;,&quot;__deletedAt&quot;:null,&quot;__name&quot;:&quot;TESTDOC.docx&quot;,&quot;originalName&quot;:&quot;TESTDOC.docx&quot;,&quot;__currentUserPermissions&quot;:[],&quot;size&quot;:13467,&quot;hash&quot;:&quot;${fileid}&quot;,&quot;version&quot;:1,&quot;__subscribers&quot;:[]}}],&quot;note&quot;:null,&quot;support_level&quot;:[{&quot;code&quot;:&quot;1_line&quot;,&quot;name&quot;:&quot;1 линия поддержки&quot;}],&quot;problems&quot;:null,&quot;group_responsible&quot;:[{&quot;code&quot;:&quot;Диспетчеры&quot;,&quot;name&quot;:&quot;Диспетчеры&quot;}],&quot;work_phone&quot;:null,&quot;mobile_phone&quot;:null,&quot;itfb_reason_for_delay&quot;:null,&quot;itfb_detailed_reason&quot;:null,&quot;itfb_timer_end_time&quot;:null,&quot;hide_editbtn&quot;:false,&quot;change_status&quot;:false,&quot;changeGroupToLetter&quot;:false,&quot;itfb_registered_on&quot;:&quot;2025-06-22T13:01:27.309Z&quot;,&quot;parent_case&quot;:null,&quot;itfb_reason_reopen&quot;:null,&quot;itfb_closure_date&quot;:null,&quot;id_massincident&quot;:null,&quot;processing&quot;:false,&quot;itfb_solved_on_support_level&quot;:null,&quot;subcategory&quot;:[&quot;019517fe-c6c8-7cc8-b932-2eb5edd1d74c&quot;],&quot;mi_name&quot;:null,&quot;lvl_of_difficulty&quot;:null,&quot;new_message_flag&quot;:null,&quot;header_message&quot;:null,&quot;average_solution_time&quot;:null,&quot;jira_id&quot;:null,&quot;stop_listener&quot;:false,&quot;itfb_tags_applications&quot;:null,&quot;itfb_no_data&quot;:null,&quot;case_origin_email&quot;:&quot;-&quot;,&quot;answers_autofaq&quot;:null,&quot;autofaq&quot;:false,&quot;autofaq_processing&quot;:false,&quot;autofaq_closed&quot;:false,&quot;solution_provided_on&quot;:null,&quot;responded_on&quot;:null,&quot;itfb_expired_by_permission&quot;:null,&quot;itfb_overdue_1_escalation&quot;:null,&quot;itfb_escalation_line_date&quot;:null,&quot;itfb_overdue_2_escalation&quot;:null,&quot;itfb_first_line_overdue&quot;:null,&quot;itfb_overdue_1&quot;:null,&quot;itfb_overdue_2&quot;:null,&quot;itfb_overdue_3&quot;:null,&quot;itfb_second_line_overdue&quot;:null,&quot;itfb_suppor_level_modified_on&quot;:null,&quot;itfb_third_line_overdue&quot;:null,&quot;jira_key&quot;:null,&quot;number_adjacent_is&quot;:null,&quot;phone_speech&quot;:null,&quot;itfb_sla_ola_violation_flag&quot;:&quot;SLA:OK,OLA_LINE_1:OK,OLA_LINE_2:OK,OLA_LINE_3:OK&quot;,&quot;itfb_overdue_confirmation_time_2&quot;:null,&quot;ola_solution_scheduled_dates_l3&quot;:null,&quot;application_text_string&quot;:null,&quot;solution_description_string&quot;:null,&quot;__name&quot;:&quot;SR${appeallnumber}&quot;,&quot;__externalProcessMeta&quot;:null,&quot;__index&quot;:${appeallnumber},&quot;__tasks&quot;:null,&quot;__tasks_earliest_duedate&quot;:null,&quot;__tasks_performers&quot;:null,&quot;__debug&quot;:null,&quot;__status&quot;:null,&quot;__statusChangedAt&quot;:null,&quot;__isDuplicate&quot;:false},&quot;tempData&quot;:{&quot;withEventForceCreate&quot;:false,&quot;assignExistingIndex&quot;:true,&quot;registeredIndex&quot;:${appeallnumber}}}</stringProp>
+                  <stringProp name="Argument.value">{&quot;payload&quot;:{&quot;__id&quot;:&quot;${appeallid}&quot;,&quot;__createdBy&quot;:null,&quot;__createdAt&quot;:null,&quot;__updatedBy&quot;:null,&quot;__updatedAt&quot;:null,&quot;__deletedAt&quot;:null,&quot;__version&quot;:0,&quot;__directory&quot;:null,&quot;__currentUserPermissions&quot;:[&quot;read&quot;,&quot;create&quot;,&quot;update&quot;,&quot;delete&quot;,&quot;assign&quot;,&quot;bpmanage&quot;,&quot;export&quot;,&quot;import&quot;],&quot;__externalId&quot;:null,&quot;application_type&quot;:[{&quot;code&quot;:&quot;consultation&quot;,&quot;name&quot;:&quot;Консультация&quot;}],&quot;priority&quot;:[{&quot;code&quot;:&quot;low&quot;,&quot;name&quot;:&quot;4. Стандартный&quot;}],&quot;criticality&quot;:[{&quot;code&quot;:&quot;middle&quot;,&quot;name&quot;:&quot;Средняя&quot;}],&quot;impact&quot;:[&quot;018f0b71-1ef0-78af-bcc5-740e89398bed&quot;],&quot;urgency&quot;:[{&quot;code&quot;:&quot;low&quot;,&quot;name&quot;:&quot;4 - Низкая&quot;}],&quot;topic&quot;:&quot;ASS_test_0${__threadNum}_${appeallnumber}&quot;,&quot;application_text&quot;:&quot;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&quot;,&quot;attachments&quot;:null,&quot;external_applicant&quot;:null,&quot;contact_information&quot;:[{&quot;type&quot;:&quot;telegram&quot;,&quot;login&quot;:&quot;&quot;}],&quot;company&quot;:[&quot;019796ea-2895-7770-8159-987fa7f7da1b&quot;],&quot;responsible&quot;:null,&quot;service&quot;:[&quot;01951800-a778-7cc8-b932-3afa87526aed&quot;],&quot;client_type&quot;:false,&quot;working_mail&quot;:null,&quot;table_of_sla_indicators&quot;:null,&quot;sla_level&quot;:null,&quot;done_on_time&quot;:null,&quot;reason_for_pending&quot;:null,&quot;remaining_time&quot;:null,&quot;time_left&quot;:0,&quot;change_status_date&quot;:null,&quot;is_update&quot;:false,&quot;transition_time_to_status_in_work&quot;:null,&quot;link_to_application&quot;:null,&quot;solution_time_timer&quot;:null,&quot;reaction_time_timer&quot;:null,&quot;square_address&quot;:&quot;elma365ent.itfbgroup.ru&quot;,&quot;regulation_time&quot;:null,&quot;reaction_time&quot;:0,&quot;solution_description&quot;:null,&quot;id&quot;:null,&quot;session_id&quot;:null,&quot;operators&quot;:null,&quot;observers&quot;:null,&quot;aplicant&quot;:null,&quot;priority_color&quot;:&quot;![p0_green.png](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAWCAYAAABUpxX0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEySURBVHgB7Ze/SsNQFMa/E6UVpRos4u4/cNMXkAg6RdcSXBqC75HmDXyCmC4q7SSSSYfiC9hBESyKkygqNAShFe0xB1LwCcIN5Lede5cfl+/C+Qgp1sWhwfTrMrCRjDoUgoDOiKjZNv0gnYFa6LhzpUrDXNvF4swCypNlqETv8xFXT9eIvuNGy/Q9skLHrpQqx87mgXKy/xn+DOHfnCAeRNsaM9d3lraUFhbET5LARK6WZNhYrS4jD0h05c9pyBFpGvRcSY8ppLOikM6KQjorCumsKKSzQqT7svblCS1pAd23r3fkASkD0mI0YvbCh0uo/triJ+1lRNycuD3tPq/U1un+o2foU7OoTs9DJUT2JX5F6+4c0SDy2nvBEY0vrdC2makupQBq0ZcISyLO9oOOHPwBQYRoM7aWKJsAAAAASUVORK5CYII=)&quot;,&quot;reaction_time_exceeded&quot;:false,&quot;tags&quot;:null,&quot;type_responsible_person_selection&quot;:[{&quot;code&quot;:&quot;manually&quot;,&quot;name&quot;:&quot;Вручную&quot;}],&quot;check_done_on_time_process_id&quot;:null,&quot;our_company&quot;:null,&quot;requalified&quot;:false,&quot;evaluation&quot;:null,&quot;comment_from_the_applicant&quot;:null,&quot;application_completed&quot;:false,&quot;getting_response&quot;:false,&quot;external_applicant_response&quot;:null,&quot;execution_application_accepted&quot;:null,&quot;application_completed_id_process&quot;:null,&quot;pattern&quot;:null,&quot;has_duplicates&quot;:false,&quot;is_parent&quot;:null,&quot;is_child&quot;:null,&quot;child_applications&quot;:null,&quot;current_support_level&quot;:null,&quot;SDApplicationHistory&quot;:null,&quot;contract&quot;:[&quot;${kontragentid}&quot;],&quot;cmdb&quot;:null,&quot;the_application_was_returned&quot;:false,&quot;__subscribers&quot;:null,&quot;service_catalog&quot;:[&quot;018f16c4-a050-7d4e-8bc8-edd53f583b82&quot;],&quot;initial_communication_channel&quot;:null,&quot;channel&quot;:null,&quot;changing_statuses&quot;:null,&quot;observers_role&quot;:null,&quot;responsible_for_the_service&quot;:null,&quot;sla_standard&quot;:null,&quot;fill_in_decision_manually&quot;:true,&quot;ola_solution_time_timer&quot;:null,&quot;ola_reaction_time_timer&quot;:null,&quot;moved_from_support_level_application&quot;:null,&quot;time_to_collect_information_timer&quot;:null,&quot;time_to_confirm_the_decision_timer&quot;:null,&quot;ola_scorecard&quot;:null,&quot;waiting_time_working&quot;:null,&quot;date_of_application_formation&quot;:null,&quot;ola_level&quot;:null,&quot;id_ola_regulatory_review_process&quot;:null,&quot;information_is_collected&quot;:false,&quot;remaining_time_ola&quot;:null,&quot;date_level_change&quot;:null,&quot;time_left_ola&quot;:null,&quot;ola_route&quot;:null,&quot;case_origin&quot;:[&quot;5e5e202a-f46b-1410-3692-0050ba5d6c38&quot;],&quot;could_solved_prior_line&quot;:null,&quot;incorrectly_classified&quot;:null,&quot;not_enough_information&quot;:null,&quot;checkbox_comment&quot;:null,&quot;stop_production&quot;:false,&quot;data_change_2LP&quot;:null,&quot;question_transferred_TG&quot;:null,&quot;question_Transferred_UD&quot;:null,&quot;stops_sipment&quot;:false,&quot;priority_change_reason&quot;:null,&quot;escalation_reason&quot;:null,&quot;inn_contractor&quot;:&quot;${appeallnumber}${appeallnumber}${appeallnumber}&quot;,&quot;name_contact&quot;:[&quot;${kontragentid}&quot;],&quot;category_service&quot;:null,&quot;request_subcategory&quot;:null,&quot;closure_code&quot;:null,&quot;actual_elapsed_time&quot;:null,&quot;level_of_difficulty&quot;:null,&quot;error_date&quot;:null,&quot;component&quot;:null,&quot;description&quot;:null,&quot;analysis&quot;:null,&quot;topic_analysis&quot;:null,&quot;indication&quot;:null,&quot;root_cause&quot;:null,&quot;description_errors&quot;:null,&quot;error&quot;:null,&quot;file_analysis&quot;:null,&quot;file_comment&quot;:[{&quot;id&quot;:&quot;${fileid}&quot;,&quot;name&quot;:&quot;TESTDOC.docx&quot;,&quot;hash&quot;:&quot;${fileid}&quot;,&quot;size&quot;:13467,&quot;file&quot;:{&quot;__id&quot;:&quot;${fileid}&quot;,&quot;__createdAt&quot;:&quot;2025-06-22T13:02:39Z&quot;,&quot;__updatedAt&quot;:&quot;2025-06-22T13:02:39Z&quot;,&quot;__deletedAt&quot;:null,&quot;__name&quot;:&quot;TESTDOC.docx&quot;,&quot;originalName&quot;:&quot;TESTDOC.docx&quot;,&quot;__currentUserPermissions&quot;:[],&quot;size&quot;:13467,&quot;hash&quot;:&quot;${fileid}&quot;,&quot;version&quot;:1,&quot;__subscribers&quot;:[]}}],&quot;note&quot;:null,&quot;support_level&quot;:[{&quot;code&quot;:&quot;1_line&quot;,&quot;name&quot;:&quot;1 линия поддержки&quot;}],&quot;problems&quot;:null,&quot;group_responsible&quot;:[{&quot;code&quot;:&quot;Диспетчеры&quot;,&quot;name&quot;:&quot;Диспетчеры&quot;}],&quot;work_phone&quot;:null,&quot;mobile_phone&quot;:null,&quot;itfb_reason_for_delay&quot;:null,&quot;itfb_detailed_reason&quot;:null,&quot;itfb_timer_end_time&quot;:null,&quot;hide_editbtn&quot;:false,&quot;change_status&quot;:false,&quot;changeGroupToLetter&quot;:false,&quot;itfb_registered_on&quot;:&quot;2025-06-22T13:01:27.309Z&quot;,&quot;parent_case&quot;:null,&quot;itfb_reason_reopen&quot;:null,&quot;itfb_closure_date&quot;:null,&quot;id_massincident&quot;:null,&quot;processing&quot;:false,&quot;itfb_solved_on_support_level&quot;:null,&quot;subcategory&quot;:[&quot;019517fe-c6c8-7cc8-b932-2eb5edd1d74c&quot;],&quot;mi_name&quot;:null,&quot;lvl_of_difficulty&quot;:null,&quot;new_message_flag&quot;:null,&quot;header_message&quot;:null,&quot;average_solution_time&quot;:null,&quot;jira_id&quot;:null,&quot;stop_listener&quot;:false,&quot;itfb_tags_applications&quot;:null,&quot;itfb_no_data&quot;:null,&quot;case_origin_email&quot;:&quot;-&quot;,&quot;answers_autofaq&quot;:null,&quot;autofaq&quot;:false,&quot;autofaq_processing&quot;:false,&quot;autofaq_closed&quot;:false,&quot;solution_provided_on&quot;:null,&quot;responded_on&quot;:null,&quot;itfb_expired_by_permission&quot;:null,&quot;itfb_overdue_1_escalation&quot;:null,&quot;itfb_escalation_line_date&quot;:null,&quot;itfb_overdue_2_escalation&quot;:null,&quot;itfb_first_line_overdue&quot;:null,&quot;itfb_overdue_1&quot;:null,&quot;itfb_overdue_2&quot;:null,&quot;itfb_overdue_3&quot;:null,&quot;itfb_second_line_overdue&quot;:null,&quot;itfb_suppor_level_modified_on&quot;:null,&quot;itfb_third_line_overdue&quot;:null,&quot;jira_key&quot;:null,&quot;number_adjacent_is&quot;:null,&quot;phone_speech&quot;:null,&quot;itfb_sla_ola_violation_flag&quot;:&quot;SLA:OK,OLA_LINE_1:OK,OLA_LINE_2:OK,OLA_LINE_3:OK&quot;,&quot;itfb_overdue_confirmation_time_2&quot;:null,&quot;ola_solution_scheduled_dates_l3&quot;:null,&quot;application_text_string&quot;:null,&quot;solution_description_string&quot;:null,&quot;__name&quot;:&quot;SR${appeallnumber}&quot;,&quot;__externalProcessMeta&quot;:null,&quot;__index&quot;:${appeallnumber},&quot;__tasks&quot;:null,&quot;__tasks_earliest_duedate&quot;:null,&quot;__tasks_performers&quot;:null,&quot;__debug&quot;:null,&quot;__status&quot;:null,&quot;__statusChangedAt&quot;:null,&quot;__isDuplicate&quot;:false},&quot;tempData&quot;:{&quot;withEventForceCreate&quot;:false,&quot;assignExistingIndex&quot;:true,&quot;registeredIndex&quot;:${appeallnumber}}}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
@@ -1414,7 +1424,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
             <hashTree/>
           </hashTree>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Update appeall">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Update appeall" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -1488,7 +1498,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Open appeall/../&quot;appeallid&quot;">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Open appeall/../&quot;appeallid&quot;" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -1502,7 +1512,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
             <collectionProp name="HeaderManager.headers">
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
@@ -1655,7 +1665,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Change_appeall_add_info_to_close дата?" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Change_appeall_add_info_to_close дата?" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -1669,7 +1679,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&quot;__id&quot;:&quot;${appeallid}&quot;,&quot;__createdBy&quot;:&quot;28e4aa0c-7556-45e5-91a4-9875ce8e76c1&quot;,&quot;__createdAt&quot;:&quot;2025-06-22T13:03:14.000Z&quot;,&quot;__updatedBy&quot;:&quot;28e4aa0c-7556-45e5-91a4-9875ce8e76c1&quot;,&quot;__updatedAt&quot;:&quot;2025-06-22T13:19:40.000Z&quot;,&quot;__deletedAt&quot;:null,&quot;__version&quot;:1750598380,&quot;__directory&quot;:null,&quot;__currentUserPermissions&quot;:[&quot;read&quot;,&quot;create&quot;,&quot;update&quot;],&quot;__externalId&quot;:null,&quot;application_type&quot;:[{&quot;code&quot;:&quot;consultation&quot;,&quot;name&quot;:&quot;Консультация&quot;}],&quot;priority&quot;:[{&quot;code&quot;:&quot;low&quot;,&quot;name&quot;:&quot;4.Стандартный &quot;}],&quot;criticality&quot;:[{&quot;code&quot;:&quot;middle&quot;,&quot;name&quot;:&quot;Средняя&quot;}],&quot;impact&quot;:[&quot;018f0b71-1ef0-78af-bcc5-740e89398bed&quot;],&quot;urgency&quot;:[{&quot;code&quot;:&quot;low&quot;,&quot;name&quot;:&quot;4 - Низкая&quot;}],&quot;topic&quot;:&quot;ASS_test_0${__threadNum}&quot;,&quot;application_text&quot;:&quot;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&quot;,&quot;attachments&quot;:null,&quot;external_applicant&quot;:null,&quot;contact_information&quot;:[{&quot;type&quot;:&quot;telegram&quot;,&quot;login&quot;:&quot;&quot;}],&quot;company&quot;:[&quot;019796ea-2895-7770-8159-987fa7f7da1b&quot;],&quot;responsible&quot;:null,&quot;service&quot;:[&quot;01951800-a778-7cc8-b932-3afa87526aed&quot;],&quot;client_type&quot;:false,&quot;working_mail&quot;:[{&quot;type&quot;:&quot;work&quot;,&quot;email&quot;:&quot;ASS_test_0${__threadNum}@1.com&quot;,&quot;isValid&quot;:true}],&quot;table_of_sla_indicators&quot;:{&quot;rows&quot;:[{&quot;__count&quot;:null,&quot;sla_level&quot;:[&quot;01940cc3-43c5-711f-8c68-3d0b5a01863e&quot;],&quot;reaction_time_string&quot;:&quot;5 минут&quot;,&quot;solution_time_string&quot;:&quot;10 минут&quot;,&quot;reaction_time_string_fact&quot;:&quot;0 минут&quot;,&quot;solution_time_string_fact&quot;:&quot;0 минут&quot;}],&quot;view&quot;:&quot;&quot;,&quot;result&quot;:{&quot;__count&quot;:1}},&quot;sla_level&quot;:[&quot;01940cc3-43c5-711f-8c68-3d0b5a01863e&quot;],&quot;done_on_time&quot;:false,&quot;reason_for_pending&quot;:null,&quot;remaining_time&quot;:600,&quot;time_left&quot;:0,&quot;change_status_date&quot;:&quot;2025-06-22T13:03:16.297Z&quot;,&quot;is_update&quot;:true,&quot;transition_time_to_status_in_work&quot;:null,&quot;link_to_application&quot;:&quot;https://elma365ent.itfbgroup.ru/service_desk/applications(p:item/service_desk/applications/${appeallid})&quot;,&quot;solution_time_timer&quot;:&quot;2025-06-23T00:09:00.000Z&quot;,&quot;reaction_time_timer&quot;:&quot;2025-06-23T00:04:00.000Z&quot;,&quot;square_address&quot;:&quot;elma365ent.itfbgroup.ru&quot;,&quot;regulation_time&quot;:&quot;2025-06-22T21:10:00.297Z&quot;,&quot;reaction_time&quot;:300,&quot;solution_description&quot;:&quot;&lt;p&gt;DONE&lt;/p&gt;&quot;,&quot;id&quot;:null,&quot;session_id&quot;:null,&quot;operators&quot;:null,&quot;observers&quot;:null,&quot;aplicant&quot;:null,&quot;priority_color&quot;:&quot;![p0_green.png](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAWCAYAAABUpxX0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEySURBVHgB7Ze/SsNQFMa/E6UVpRos4u4/cNMXkAg6RdcSXBqC75HmDXyCmC4q7SSSSYfiC9hBESyKkygqNAShFe0xB1LwCcIN5Lede5cfl+/C+Qgp1sWhwfTrMrCRjDoUgoDOiKjZNv0gnYFa6LhzpUrDXNvF4swCypNlqETv8xFXT9eIvuNGy/Q9skLHrpQqx87mgXKy/xn+DOHfnCAeRNsaM9d3lraUFhbET5LARK6WZNhYrS4jD0h05c9pyBFpGvRcSY8ppLOikM6KQjorCumsKKSzQqT7svblCS1pAd23r3fkASkD0mI0YvbCh0uo/triJ+1lRNycuD3tPq/U1un+o2foU7OoTs9DJUT2JX5F6+4c0SDy2nvBEY0vrdC2makupQBq0ZcISyLO9oOOHPwBQYRoM7aWKJsAAAAASUVORK5CYII=)&quot;,&quot;reaction_time_exceeded&quot;:false,&quot;tags&quot;:null,&quot;type_responsible_person_selection&quot;:[{&quot;code&quot;:&quot;manually&quot;,&quot;name&quot;:&quot;Вручную&quot;}],&quot;check_done_on_time_process_id&quot;:null,&quot;our_company&quot;:null,&quot;requalified&quot;:false,&quot;evaluation&quot;:null,&quot;comment_from_the_applicant&quot;:null,&quot;application_completed&quot;:false,&quot;getting_response&quot;:false,&quot;external_applicant_response&quot;:null,&quot;execution_application_accepted&quot;:null,&quot;application_completed_id_process&quot;:null,&quot;pattern&quot;:null,&quot;has_duplicates&quot;:false,&quot;is_parent&quot;:null,&quot;is_child&quot;:null,&quot;child_applications&quot;:{&quot;rows&quot;:[],&quot;view&quot;:&quot;&quot;,&quot;result&quot;:{&quot;__count&quot;:0}},&quot;current_support_level&quot;:null,&quot;SDApplicationHistory&quot;:null,&quot;contract&quot;:[&quot;${kontragentid}&quot;],&quot;cmdb&quot;:null,&quot;the_application_was_returned&quot;:false,&quot;__subscribers&quot;:[&quot;28e4aa0c-7556-45e5-91a4-9875ce8e76c1&quot;],&quot;service_catalog&quot;:[&quot;018f16c4-a050-7d4e-8bc8-edd53f583b82&quot;],&quot;initial_communication_channel&quot;:null,&quot;channel&quot;:null,&quot;changing_statuses&quot;:{&quot;rows&quot;:[],&quot;view&quot;:&quot;&quot;,&quot;result&quot;:{&quot;__count&quot;:0}},&quot;observers_role&quot;:null,&quot;responsible_for_the_service&quot;:null,&quot;sla_standard&quot;:null,&quot;fill_in_decision_manually&quot;:true,&quot;ola_solution_time_timer&quot;:null,&quot;ola_reaction_time_timer&quot;:null,&quot;moved_from_support_level_application&quot;:null,&quot;time_to_collect_information_timer&quot;:null,&quot;time_to_confirm_the_decision_timer&quot;:null,&quot;ola_scorecard&quot;:{&quot;rows&quot;:[],&quot;view&quot;:&quot;&quot;,&quot;result&quot;:{&quot;__count&quot;:0}},&quot;waiting_time_working&quot;:null,&quot;date_of_application_formation&quot;:&quot;2025-06-22T13:03:16.297Z&quot;,&quot;ola_level&quot;:null,&quot;id_ola_regulatory_review_process&quot;:null,&quot;information_is_collected&quot;:false,&quot;remaining_time_ola&quot;:null,&quot;date_level_change&quot;:null,&quot;time_left_ola&quot;:0,&quot;ola_route&quot;:null,&quot;case_origin&quot;:[&quot;5e5e202a-f46b-1410-3692-0050ba5d6c38&quot;],&quot;could_solved_prior_line&quot;:null,&quot;incorrectly_classified&quot;:null,&quot;not_enough_information&quot;:null,&quot;checkbox_comment&quot;:null,&quot;stop_production&quot;:false,&quot;data_change_2LP&quot;:null,&quot;question_transferred_TG&quot;:null,&quot;question_Transferred_UD&quot;:null,&quot;stops_sipment&quot;:false,&quot;priority_change_reason&quot;:null,&quot;escalation_reason&quot;:null,&quot;inn_contractor&quot;:&quot;00000000000000&quot;,&quot;name_contact&quot;:[&quot;${contactid}&quot;],&quot;category_service&quot;:null,&quot;request_subcategory&quot;:null,&quot;closure_code&quot;:null,&quot;actual_elapsed_time&quot;:1,&quot;level_of_difficulty&quot;:null,&quot;error_date&quot;:null,&quot;component&quot;:null,&quot;description&quot;:null,&quot;analysis&quot;:null,&quot;topic_analysis&quot;:null,&quot;indication&quot;:null,&quot;root_cause&quot;:null,&quot;description_errors&quot;:null,&quot;error&quot;:null,&quot;file_analysis&quot;:null,&quot;file_comment&quot;:null,&quot;note&quot;:null,&quot;support_level&quot;:[{&quot;code&quot;:&quot;1_line&quot;,&quot;name&quot;:&quot;1 линия поддержки&quot;}],&quot;problems&quot;:null,&quot;group_responsible&quot;:[{&quot;code&quot;:&quot;Диспетчеры&quot;,&quot;name&quot;:&quot;Диспетчеры&quot;}],&quot;work_phone&quot;:null,&quot;mobile_phone&quot;:null,&quot;itfb_reason_for_delay&quot;:null,&quot;itfb_detailed_reason&quot;:null,&quot;itfb_timer_end_time&quot;:&quot;2025-06-22T13:23:00.251Z&quot;,&quot;hide_editbtn&quot;:false,&quot;change_status&quot;:false,&quot;changeGroupToLetter&quot;:false,&quot;itfb_registered_on&quot;:&quot;2025-06-22T13:01:27.309Z&quot;,&quot;parent_case&quot;:null,&quot;itfb_reason_reopen&quot;:null,&quot;itfb_closure_date&quot;:null,&quot;id_massincident&quot;:null,&quot;processing&quot;:true,&quot;itfb_solved_on_support_level&quot;:null,&quot;subcategory&quot;:[&quot;019517fe-c6c8-7cc8-b932-2eb5edd1d74c&quot;],&quot;mi_name&quot;:null,&quot;lvl_of_difficulty&quot;:[{&quot;code&quot;:&quot;1&quot;,&quot;name&quot;:&quot;1&quot;}],&quot;new_message_flag&quot;:null,&quot;header_message&quot;:null,&quot;average_solution_time&quot;:null,&quot;jira_id&quot;:null,&quot;stop_listener&quot;:false,&quot;itfb_tags_applications&quot;:null,&quot;itfb_no_data&quot;:null,&quot;case_origin_email&quot;:&quot;-&quot;,&quot;answers_autofaq&quot;:null,&quot;autofaq&quot;:false,&quot;autofaq_processing&quot;:false,&quot;autofaq_closed&quot;:false,&quot;solution_provided_on&quot;:null,&quot;responded_on&quot;:&quot;2025-06-22T13:17:52.931Z&quot;,&quot;itfb_expired_by_permission&quot;:false,&quot;itfb_overdue_1_escalation&quot;:false,&quot;itfb_escalation_line_date&quot;:null,&quot;itfb_overdue_2_escalation&quot;:false,&quot;itfb_first_line_overdue&quot;:false,&quot;itfb_overdue_1&quot;:false,&quot;itfb_overdue_2&quot;:false,&quot;itfb_overdue_3&quot;:false,&quot;itfb_second_line_overdue&quot;:false,&quot;itfb_suppor_level_modified_on&quot;:null,&quot;itfb_third_line_overdue&quot;:false,&quot;jira_key&quot;:null,&quot;number_adjacent_is&quot;:null,&quot;phone_speech&quot;:null,&quot;itfb_sla_ola_violation_flag&quot;:&quot;SLA:OK,OLA_LINE_1:OK,OLA_LINE_2:OK,OLA_LINE_3:OK&quot;,&quot;itfb_overdue_confirmation_time_2&quot;:false,&quot;ola_solution_scheduled_dates_l3&quot;:null,&quot;application_text_string&quot;:null,&quot;solution_description_string&quot;:null,&quot;__name&quot;:&quot;SR5580&quot;,&quot;__externalProcessMeta&quot;:null,&quot;__index&quot;:${appeallnumber},&quot;__tasks&quot;:null,&quot;__tasks_earliest_duedate&quot;:null,&quot;__tasks_performers&quot;:null,&quot;__debug&quot;:false,&quot;__status&quot;:{&quot;order&quot;:0,&quot;status&quot;:11},&quot;__statusChangedAt&quot;:&quot;2025-06-22T13:17:59.825Z&quot;,&quot;__isDuplicate&quot;:false}</stringProp>
+                <stringProp name="Argument.value">{&quot;__id&quot;:&quot;${appeallid}&quot;,&quot;__createdBy&quot;:&quot;28e4aa0c-7556-45e5-91a4-9875ce8e76c1&quot;,&quot;__createdAt&quot;:&quot;${datetime}&quot;,&quot;__updatedBy&quot;:&quot;28e4aa0c-7556-45e5-91a4-9875ce8e76c1&quot;,&quot;__updatedAt&quot;:&quot;${datetime}&quot;,&quot;__deletedAt&quot;:null,&quot;__version&quot;:1750598380,&quot;__directory&quot;:null,&quot;__currentUserPermissions&quot;:[&quot;read&quot;,&quot;create&quot;,&quot;update&quot;],&quot;__externalId&quot;:null,&quot;application_type&quot;:[{&quot;code&quot;:&quot;consultation&quot;,&quot;name&quot;:&quot;Консультация&quot;}],&quot;priority&quot;:[{&quot;code&quot;:&quot;low&quot;,&quot;name&quot;:&quot;4.Стандартный &quot;}],&quot;criticality&quot;:[{&quot;code&quot;:&quot;middle&quot;,&quot;name&quot;:&quot;Средняя&quot;}],&quot;impact&quot;:[&quot;018f0b71-1ef0-78af-bcc5-740e89398bed&quot;],&quot;urgency&quot;:[{&quot;code&quot;:&quot;low&quot;,&quot;name&quot;:&quot;4 - Низкая&quot;}],&quot;topic&quot;:&quot;ASS_test_0${__threadNum}_${appeallnumber}&quot;,&quot;application_text&quot;:&quot;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&quot;,&quot;attachments&quot;:null,&quot;external_applicant&quot;:null,&quot;contact_information&quot;:[{&quot;type&quot;:&quot;telegram&quot;,&quot;login&quot;:&quot;&quot;}],&quot;company&quot;:[&quot;019796ea-2895-7770-8159-987fa7f7da1b&quot;],&quot;responsible&quot;:null,&quot;service&quot;:[&quot;01951800-a778-7cc8-b932-3afa87526aed&quot;],&quot;client_type&quot;:false,&quot;working_mail&quot;:[{&quot;type&quot;:&quot;work&quot;,&quot;email&quot;:&quot;ASS_test_0${__threadNum}_${appeallnumber}@1.com&quot;,&quot;isValid&quot;:true}],&quot;table_of_sla_indicators&quot;:{&quot;rows&quot;:[{&quot;__count&quot;:null,&quot;sla_level&quot;:[&quot;01940cc3-43c5-711f-8c68-3d0b5a01863e&quot;],&quot;reaction_time_string&quot;:&quot;5 минут&quot;,&quot;solution_time_string&quot;:&quot;10 минут&quot;,&quot;reaction_time_string_fact&quot;:&quot;0 минут&quot;,&quot;solution_time_string_fact&quot;:&quot;0 минут&quot;}],&quot;view&quot;:&quot;&quot;,&quot;result&quot;:{&quot;__count&quot;:1}},&quot;sla_level&quot;:[&quot;01940cc3-43c5-711f-8c68-3d0b5a01863e&quot;],&quot;done_on_time&quot;:false,&quot;reason_for_pending&quot;:null,&quot;remaining_time&quot;:600,&quot;time_left&quot;:0,&quot;change_status_date&quot;:&quot;${datetime}&quot;,&quot;is_update&quot;:true,&quot;transition_time_to_status_in_work&quot;:null,&quot;link_to_application&quot;:&quot;https://elma365ent.itfbgroup.ru/service_desk/applications(p:item/service_desk/applications/${appeallid})&quot;,&quot;solution_time_timer&quot;:&quot;2025-06-23T00:09:00.000Z&quot;,&quot;reaction_time_timer&quot;:&quot;2025-06-23T00:04:00.000Z&quot;,&quot;square_address&quot;:&quot;elma365ent.itfbgroup.ru&quot;,&quot;regulation_time&quot;:&quot;2025-06-22T21:10:00.297Z&quot;,&quot;reaction_time&quot;:300,&quot;solution_description&quot;:&quot;&lt;p&gt;DONE&lt;/p&gt;&quot;,&quot;id&quot;:null,&quot;session_id&quot;:null,&quot;operators&quot;:null,&quot;observers&quot;:null,&quot;aplicant&quot;:null,&quot;priority_color&quot;:&quot;![p0_green.png](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAWCAYAAABUpxX0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEySURBVHgB7Ze/SsNQFMa/E6UVpRos4u4/cNMXkAg6RdcSXBqC75HmDXyCmC4q7SSSSYfiC9hBESyKkygqNAShFe0xB1LwCcIN5Lede5cfl+/C+Qgp1sWhwfTrMrCRjDoUgoDOiKjZNv0gnYFa6LhzpUrDXNvF4swCypNlqETv8xFXT9eIvuNGy/Q9skLHrpQqx87mgXKy/xn+DOHfnCAeRNsaM9d3lraUFhbET5LARK6WZNhYrS4jD0h05c9pyBFpGvRcSY8ppLOikM6KQjorCumsKKSzQqT7svblCS1pAd23r3fkASkD0mI0YvbCh0uo/triJ+1lRNycuD3tPq/U1un+o2foU7OoTs9DJUT2JX5F6+4c0SDy2nvBEY0vrdC2makupQBq0ZcISyLO9oOOHPwBQYRoM7aWKJsAAAAASUVORK5CYII=)&quot;,&quot;reaction_time_exceeded&quot;:false,&quot;tags&quot;:null,&quot;type_responsible_person_selection&quot;:[{&quot;code&quot;:&quot;manually&quot;,&quot;name&quot;:&quot;Вручную&quot;}],&quot;check_done_on_time_process_id&quot;:null,&quot;our_company&quot;:null,&quot;requalified&quot;:false,&quot;evaluation&quot;:null,&quot;comment_from_the_applicant&quot;:null,&quot;application_completed&quot;:false,&quot;getting_response&quot;:false,&quot;external_applicant_response&quot;:null,&quot;execution_application_accepted&quot;:null,&quot;application_completed_id_process&quot;:null,&quot;pattern&quot;:null,&quot;has_duplicates&quot;:false,&quot;is_parent&quot;:null,&quot;is_child&quot;:null,&quot;child_applications&quot;:{&quot;rows&quot;:[],&quot;view&quot;:&quot;&quot;,&quot;result&quot;:{&quot;__count&quot;:0}},&quot;current_support_level&quot;:null,&quot;SDApplicationHistory&quot;:null,&quot;contract&quot;:[&quot;${kontragentid}&quot;],&quot;cmdb&quot;:null,&quot;the_application_was_returned&quot;:false,&quot;__subscribers&quot;:[&quot;28e4aa0c-7556-45e5-91a4-9875ce8e76c1&quot;],&quot;service_catalog&quot;:[&quot;018f16c4-a050-7d4e-8bc8-edd53f583b82&quot;],&quot;initial_communication_channel&quot;:null,&quot;channel&quot;:null,&quot;changing_statuses&quot;:{&quot;rows&quot;:[],&quot;view&quot;:&quot;&quot;,&quot;result&quot;:{&quot;__count&quot;:0}},&quot;observers_role&quot;:null,&quot;responsible_for_the_service&quot;:null,&quot;sla_standard&quot;:null,&quot;fill_in_decision_manually&quot;:true,&quot;ola_solution_time_timer&quot;:null,&quot;ola_reaction_time_timer&quot;:null,&quot;moved_from_support_level_application&quot;:null,&quot;time_to_collect_information_timer&quot;:null,&quot;time_to_confirm_the_decision_timer&quot;:null,&quot;ola_scorecard&quot;:{&quot;rows&quot;:[],&quot;view&quot;:&quot;&quot;,&quot;result&quot;:{&quot;__count&quot;:0}},&quot;waiting_time_working&quot;:null,&quot;date_of_application_formation&quot;:&quot;${datetime}&quot;,&quot;ola_level&quot;:null,&quot;id_ola_regulatory_review_process&quot;:null,&quot;information_is_collected&quot;:false,&quot;remaining_time_ola&quot;:null,&quot;date_level_change&quot;:null,&quot;time_left_ola&quot;:0,&quot;ola_route&quot;:null,&quot;case_origin&quot;:[&quot;5e5e202a-f46b-1410-3692-0050ba5d6c38&quot;],&quot;could_solved_prior_line&quot;:null,&quot;incorrectly_classified&quot;:null,&quot;not_enough_information&quot;:null,&quot;checkbox_comment&quot;:null,&quot;stop_production&quot;:false,&quot;data_change_2LP&quot;:null,&quot;question_transferred_TG&quot;:null,&quot;question_Transferred_UD&quot;:null,&quot;stops_sipment&quot;:false,&quot;priority_change_reason&quot;:null,&quot;escalation_reason&quot;:null,&quot;inn_contractor&quot;:&quot;00000000000000&quot;,&quot;name_contact&quot;:[&quot;${contactid}&quot;],&quot;category_service&quot;:null,&quot;request_subcategory&quot;:null,&quot;closure_code&quot;:null,&quot;actual_elapsed_time&quot;:1,&quot;level_of_difficulty&quot;:null,&quot;error_date&quot;:null,&quot;component&quot;:null,&quot;description&quot;:null,&quot;analysis&quot;:null,&quot;topic_analysis&quot;:null,&quot;indication&quot;:null,&quot;root_cause&quot;:null,&quot;description_errors&quot;:null,&quot;error&quot;:null,&quot;file_analysis&quot;:null,&quot;file_comment&quot;:null,&quot;note&quot;:null,&quot;support_level&quot;:[{&quot;code&quot;:&quot;1_line&quot;,&quot;name&quot;:&quot;1 линия поддержки&quot;}],&quot;problems&quot;:null,&quot;group_responsible&quot;:[{&quot;code&quot;:&quot;Диспетчеры&quot;,&quot;name&quot;:&quot;Диспетчеры&quot;}],&quot;work_phone&quot;:null,&quot;mobile_phone&quot;:null,&quot;itfb_reason_for_delay&quot;:null,&quot;itfb_detailed_reason&quot;:null,&quot;itfb_timer_end_time&quot;:&quot;2025-06-22T13:23:00.251Z&quot;,&quot;hide_editbtn&quot;:false,&quot;change_status&quot;:false,&quot;changeGroupToLetter&quot;:false,&quot;itfb_registered_on&quot;:&quot;2025-06-22T13:01:27.309Z&quot;,&quot;parent_case&quot;:null,&quot;itfb_reason_reopen&quot;:null,&quot;itfb_closure_date&quot;:null,&quot;id_massincident&quot;:null,&quot;processing&quot;:true,&quot;itfb_solved_on_support_level&quot;:null,&quot;subcategory&quot;:[&quot;019517fe-c6c8-7cc8-b932-2eb5edd1d74c&quot;],&quot;mi_name&quot;:null,&quot;lvl_of_difficulty&quot;:[{&quot;code&quot;:&quot;1&quot;,&quot;name&quot;:&quot;1&quot;}],&quot;new_message_flag&quot;:null,&quot;header_message&quot;:null,&quot;average_solution_time&quot;:null,&quot;jira_id&quot;:null,&quot;stop_listener&quot;:false,&quot;itfb_tags_applications&quot;:null,&quot;itfb_no_data&quot;:null,&quot;case_origin_email&quot;:&quot;-&quot;,&quot;answers_autofaq&quot;:null,&quot;autofaq&quot;:false,&quot;autofaq_processing&quot;:false,&quot;autofaq_closed&quot;:false,&quot;solution_provided_on&quot;:null,&quot;responded_on&quot;:&quot;2025-06-22T13:17:52.931Z&quot;,&quot;itfb_expired_by_permission&quot;:false,&quot;itfb_overdue_1_escalation&quot;:false,&quot;itfb_escalation_line_date&quot;:null,&quot;itfb_overdue_2_escalation&quot;:false,&quot;itfb_first_line_overdue&quot;:false,&quot;itfb_overdue_1&quot;:false,&quot;itfb_overdue_2&quot;:false,&quot;itfb_overdue_3&quot;:false,&quot;itfb_second_line_overdue&quot;:false,&quot;itfb_suppor_level_modified_on&quot;:null,&quot;itfb_third_line_overdue&quot;:false,&quot;jira_key&quot;:null,&quot;number_adjacent_is&quot;:null,&quot;phone_speech&quot;:null,&quot;itfb_sla_ola_violation_flag&quot;:&quot;SLA:OK,OLA_LINE_1:OK,OLA_LINE_2:OK,OLA_LINE_3:OK&quot;,&quot;itfb_overdue_confirmation_time_2&quot;:false,&quot;ola_solution_scheduled_dates_l3&quot;:null,&quot;application_text_string&quot;:null,&quot;solution_description_string&quot;:null,&quot;__name&quot;:&quot;SR${appeallnumber}&quot;,&quot;__externalProcessMeta&quot;:null,&quot;__index&quot;:${appeallnumber},&quot;__tasks&quot;:null,&quot;__tasks_earliest_duedate&quot;:null,&quot;__tasks_performers&quot;:null,&quot;__debug&quot;:false,&quot;__status&quot;:{&quot;order&quot;:0,&quot;status&quot;:11},&quot;__statusChangedAt&quot;:&quot;${datetime}&quot;,&quot;__isDuplicate&quot;:false}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -1911,12 +1921,12 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           <boolProp name="displaySystemProperties">false</boolProp>
         </DebugSampler>
         <hashTree/>
-        <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer">
+        <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
           <stringProp name="ConstantTimer.delay">1000</stringProp>
         </ConstantTimer>
         <hashTree/>
       </hashTree>
-      <ProxyControl guiclass="ProxyControlGui" testclass="ProxyControl" testname="HTTP(S) Test Script Recorder">
+      <ProxyControl guiclass="ProxyControlGui" testclass="ProxyControl" testname="HTTP(S) Test Script Recorder" enabled="true">
         <stringProp name="ProxyControlGui.port">8888</stringProp>
         <collectionProp name="ProxyControlGui.exclude_list"/>
         <collectionProp name="ProxyControlGui.include_list"/>
@@ -1939,7 +1949,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
         <stringProp name="ProxyControlGui.content_type_exclude"></stringProp>
       </ProxyControl>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="loadfile/api/disk/files/fileformatcheck-1">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="loadfile/api/disk/files/fileformatcheck-1" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -2392,7 +2402,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/serial/service_desk.applications/__default-1">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/serial/service_desk.applications/__default-1" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -2460,7 +2470,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/serial/service_desk.applications/__default/reserve-3">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/serial/service_desk.applications/__default/reserve-3" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -2524,7 +2534,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/status-2">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/status-2" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -2600,7 +2610,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/widgets/public/service_desk.applications/create_form_v2-4">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/widgets/public/service_desk.applications/create_form_v2-4" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -2668,7 +2678,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/collection/system/substitutions/items-5">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/collection/system/substitutions/items-5" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -2768,7 +2778,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/groups-6">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/groups-6" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -2868,7 +2878,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/users-7">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/users-7" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -2968,7 +2978,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/apps-9">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/apps-9" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -3074,7 +3084,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/pages-8">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/pages-8" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -3174,7 +3184,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/collection/system/sys_collections/items-10">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/collection/system/sys_collections/items-10" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -3274,7 +3284,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/collection/system/substitutions/items-12">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/collection/system/substitutions/items-12" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -3360,7 +3370,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/pages/ids-11">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/pages/ids-11" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -3432,7 +3442,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/widgets/public/service_desk.applications/wgt_application_company_create-14">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/widgets/public/service_desk.applications/wgt_application_company_create-14" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -3500,7 +3510,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/groups-13">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/groups-13" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -3579,7 +3589,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/widgets/public/service_desk.applications/wgt_application_contact_create-15">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/widgets/public/service_desk.applications/wgt_application_contact_create-15" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -3647,7 +3657,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/widgets/public/service_desk.applications/create_form_kontragent_wgt-16">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/widgets/public/service_desk.applications/create_form_kontragent_wgt-16" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -3715,7 +3725,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/widgets/public/service_desk.applications/create_form_mi_wgt-17">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/widgets/public/service_desk.applications/create_form_mi_wgt-17" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -3783,7 +3793,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/users-18">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/users-18" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -3862,7 +3872,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/collection/system/sys_collections/items-20">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/collection/system/sys_collections/items-20" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -3941,7 +3951,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/apps-19">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/apps-19" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -4020,7 +4030,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/commerce/license/features/check/current-24">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/commerce/license/features/check/current-24" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -4094,7 +4104,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/commerce/license/features/check/current-21">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/commerce/license/features/check/current-21" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -4168,7 +4178,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/commerce/license/features/check/current-22">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/commerce/license/features/check/current-22" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -4242,7 +4252,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/commerce/license/features/check/current-25">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/commerce/license/features/check/current-25" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -4316,7 +4326,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/commerce/license/features/check/current-23">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/commerce/license/features/check/current-23" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -4390,7 +4400,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/commerce/license/features/check/current-26">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/commerce/license/features/check/current-26" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -4464,7 +4474,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/widgets/list-info-by-extension-zone/global/toolbar-extension-zone-27">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/widgets/list-info-by-extension-zone/global/toolbar-extension-zone-27" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -4528,7 +4538,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/exchangesrv/solutions-28">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/exchangesrv/solutions-28" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -4592,7 +4602,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/pages-29">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/pages-29" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -4671,7 +4681,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/commerce/license/stores-30">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/commerce/license/stores-30" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -4735,7 +4745,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/worker/users/28e4aa0c-7556-45e5-91a4-9875ce8e76c1-31">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/worker/users/28e4aa0c-7556-45e5-91a4-9875ce8e76c1-31" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -4783,7 +4793,7 @@ Z�&#x10;&#x2;-T&#x8;�&#x16;*�@&#xb;&#x15;B��&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/worker/cache/system_ManualCreateSr01979bd5-321c-755e-afd0-c82f4560f6ca-33">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GenerateID/api/worker/cache/system_ManualCreateSr01979bd5-321c-755e-afd0-c82f4560f6ca-33" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -5903,7 +5913,7 @@ Content-Type: application/json&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/apps/service_desk/applications/events/resubscribe-50">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/apps/service_desk/applications/events/resubscribe-50" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -5977,7 +5987,7 @@ Content-Type: application/json&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/apps/service_desk/applications/events/resubscribe-51">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/apps/service_desk/applications/events/resubscribe-51" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -6051,7 +6061,7 @@ Content-Type: application/json&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/apps/service_desk/applications/permissions-settings-53">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/apps/service_desk/applications/permissions-settings-53" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -6119,7 +6129,7 @@ Content-Type: application/json&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/apps/service_desk/applications/items/e34d2fcc-4d79-4f1a-a258-1675d551ec4b/events/view-52">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/apps/service_desk/applications/items/e34d2fcc-4d79-4f1a-a258-1675d551ec4b/events/view-52" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -6197,7 +6207,7 @@ Content-Type: application/json&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/batch-54">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/batch-54" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -6280,7 +6290,7 @@ Accept: application/json; charset=utf-8&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/apps/service_desk/applications/items/e34d2fcc-4d79-4f1a-a258-1675d551ec4b/updates/subscribe-55">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/apps/service_desk/applications/items/e34d2fcc-4d79-4f1a-a258-1675d551ec4b/updates/subscribe-55" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -6354,7 +6364,7 @@ Accept: application/json; charset=utf-8&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/view_form_v2-56">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/view_form_v2-56" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -6422,7 +6432,7 @@ Accept: application/json; charset=utf-8&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/view_form_processing_timer_wgt-57">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/view_form_processing_timer_wgt-57" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -6490,7 +6500,7 @@ Accept: application/json; charset=utf-8&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/wgt_req_action_view-59">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/wgt_req_action_view-59" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -6558,7 +6568,7 @@ Accept: application/json; charset=utf-8&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/wgt_req_status_view-58">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/wgt_req_status_view-58" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -6626,7 +6636,7 @@ Accept: application/json; charset=utf-8&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/sla_ola_wgt_view-60">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/sla_ola_wgt_view-60" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -6694,7 +6704,7 @@ Accept: application/json; charset=utf-8&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/wgt_application_company-61">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/wgt_application_company-61" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -6762,7 +6772,7 @@ Accept: application/json; charset=utf-8&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/catalog/itfb_audit_tabulator-64">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/catalog/itfb_audit_tabulator-64" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -6830,7 +6840,7 @@ Accept: application/json; charset=utf-8&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/itfb_communication_view-63">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/itfb_communication_view-63" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -6898,7 +6908,7 @@ Accept: application/json; charset=utf-8&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/wgt_application_contact-62">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/wgt_application_contact-62" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -6966,7 +6976,7 @@ Accept: application/json; charset=utf-8&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/wgt_reviews-65">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/wgt_reviews-65" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -7034,7 +7044,7 @@ Accept: application/json; charset=utf-8&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/wgt_applications_life_cycle_optimization-66">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/wgt_applications_life_cycle_optimization-66" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -7102,7 +7112,7 @@ Accept: application/json; charset=utf-8&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/itfb_answers_autofaq-67">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/public/service_desk.applications/itfb_answers_autofaq-67" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -7170,7 +7180,7 @@ Accept: application/json; charset=utf-8&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/crpt/api/wgt/api08/e34d2fcc-4d79-4f1a-a258-1675d551ec4b-69">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/crpt/api/wgt/api08/e34d2fcc-4d79-4f1a-a258-1675d551ec4b-69" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -7218,7 +7228,7 @@ Accept: application/json; charset=utf-8&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/list-info-by-extension-zone/global/toolbar-extension-zone-68">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="view/api/widgets/list-info-by-extension-zone/global/toolbar-extension-zone-68" enabled="true">
           <stringProp name="HTTPSampler.domain">crpt-dev.bpm.loc</stringProp>
           <stringProp name="HTTPSampler.port">0</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -7766,13 +7776,13 @@ Content-Type: application/json&#xd;
           <hashTree/>
         </hashTree>
       </hashTree>
-      <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager">
+      <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
         <collectionProp name="CookieManager.cookies"/>
         <boolProp name="CookieManager.clearEachIteration">false</boolProp>
         <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
       </CookieManager>
       <hashTree/>
-      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
